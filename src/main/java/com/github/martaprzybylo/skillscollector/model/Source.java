@@ -16,11 +16,11 @@ public class Source extends EntityBase  {
     @Column (name = "name")
     private String sourceName;
 
-    @Column (name = "desc")
+    @Column (name = "description")
     private String sourceDescription;
 
     @ManyToMany
-    @JoinTable (name = "sources_attached_skolls",
+    @JoinTable (name = "sources_attached_skills",
     joinColumns = @JoinColumn (name = "source_id"),
     inverseJoinColumns = @JoinColumn (name = "skill_id"))
     private List <Skill> attachedSkills;

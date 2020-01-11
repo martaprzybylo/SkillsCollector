@@ -15,7 +15,7 @@ public class User extends EntityBase {
      * zbiór znanych źródeł wiedzy (knownSources),
      */
 
-    @Column (unique = true, nullable = false, name = "user_name")
+    @Column (unique = true, nullable = false, name = "username")
     private String userName;
 
     @Column (nullable = false, name = "password")

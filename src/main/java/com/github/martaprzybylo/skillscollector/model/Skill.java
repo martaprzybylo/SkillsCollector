@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Table (name = "skills")
 public class Skill extends EntityBase  {
 
-    @Column (name = "skill_name")
+    @Column (name = "name")
     private String name;
 
     public String getName() {
