@@ -16,7 +16,7 @@ public class User extends EntityBase {
      */
 
     @Column (unique = true, nullable = false, name = "username")
-    private String userName;
+    private String username;
 
     @Column (nullable = false, name = "password")
     private String password;
@@ -34,11 +34,11 @@ public class User extends EntityBase {
     private Set<Source> knownSources;
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -76,7 +76,7 @@ public class User extends EntityBase {
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "userName='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
