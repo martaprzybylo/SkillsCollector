@@ -10,49 +10,51 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet (urlPatterns = "/register")
-public class RegistrationServlet extends HttpServlet {
+@WebServlet (urlPatterns = "/login")
+public class LoginServlet extends HttpServlet {
 
-    private UserDao userDao ;
+    private UserDao userDao;
 
     @Override
     public void init() throws ServletException {
+
         userDao = new UserDao((SessionFactory) getServletContext().getAttribute("session_factory"));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String registerJsp = "/WEB-INF/views/register.jsp";
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(registerJsp);
+        String loginJsp = "/WEB-INF/views/login.jsp";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(loginJsp);
         dispatcher.forward(req,resp);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
 
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
 
-        if (userDao.isUsernameAvailable(username)){
-            userDao.save(user);
-            resp.sendRedirect("/login");
+        List<User> allByUsernameAndPassword = userDao.getAllByUsernameAndPassword(username, password);
+
+
+        if (allByUsernameAndPassword.isEmpty()){
+            req.setAttribute("error", "W bazie nie występuje użytkownik o podanym loginie lub/i haśle");
+            req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
         } else {
-            req.setAttribute("error", "Nazwa użytkownika jest już zajęta");
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req,resp);
-
+            req.getSession().invalidate();
+            HttpSession session = req.getSession(true);
+            user = allByUsernameAndPassword.get(0);
+            session.setAttribute("user", user);
+            resp.sendRedirect("/user/skills");
         }
+
 
     }
 }

@@ -1,5 +1,7 @@
 package com.github.martaprzybylo.skillscollector.dao;
 
+import com.github.martaprzybylo.skillscollector.model.Skill;
+import com.github.martaprzybylo.skillscollector.model.Source;
 import com.github.martaprzybylo.skillscollector.model.User;
 import org.hibernate.SessionFactory;
 
@@ -55,4 +57,17 @@ public class UserDao extends BaseDao {
                         .setParameter("password", password)
                         .getResultList());
     }
+
+    public List <Skill> getAllUserSkills(User user) {
+        return super.produceInTransaction(session -> session.createQuery("select so from User u " +
+                "join u.knownSources sr JOIN sr.attachedSkills so", Skill.class).getResultList());
+    }
+
+//    public List <Source> getAllWithSkill(){
+//        return super.produceInTransaction(
+//                session -> session.createQuery("SELECT DISTINCT s FROM Source s join fetch s.attachedSkills"
+//                        , Source.class)
+//                        .getResultList());
+//
+//    }
 }

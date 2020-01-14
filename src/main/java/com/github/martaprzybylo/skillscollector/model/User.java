@@ -33,11 +33,11 @@ public class User extends EntityBase {
     inverseJoinColumns = @JoinColumn (name = "source_id"))
     private Set<Source> knownSources;
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

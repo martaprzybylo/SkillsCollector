@@ -8,12 +8,12 @@
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
-    <title>Title</title>
-    <p><a href="/user/skills">Strona główna: </a> </p>
-    <p><a href="/register">Rejestracja: </a> </p>
-    <p><a href="/login">Logowanie: </a> </p>
-    <p><a href="/logout">Wylogowanie: </a> </p>
-    <p><a href="/user/sources">Źródła wiedzy: </a> </p>
-    <p><a href="/user/unknown-sources">Nieznane źródła wiedzy: </a> </p>
+    <title>Aplikacja Kliencka</title>
+    <p><a href="/user/skills">Strona główna  </a> &nbsp;&nbsp;
+    <a href="/register">Rejestracja  </a> &nbsp;&nbsp;
+    <a href="/login">Logowanie  </a> &nbsp;&nbsp;
+    <a href="/logout">Wylogowanie  </a> &nbsp;&nbsp;
+    <a href="/user/sources">Źródła wiedzy  </a> &nbsp;&nbsp;
+    <a href="/user/unknown-sources">Nieznane źródła wiedzy  </a> </p>
 </header>
 
